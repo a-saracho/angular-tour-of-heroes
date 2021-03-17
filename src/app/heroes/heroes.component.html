@@ -20,9 +20,27 @@
     el de la etiqueta en la que se declara el bucle
     una vez acaba el bucle no afecta variables anteriores con ese nombre
     si no hay elementos en el bucle no se crea la etiqueta que lo contiene-->
+
+<!--Añadimos un evento onclick al elemento de lsita generado por el bucle-->
+
+<!--Añadimos la clase selected al elemento si se corrresponde con selectedHero-->
 <h2>My Heroes</h2>
 <ul class="heroes">
-    <li *ngFor="let hero of heroes">
+    <li *ngFor="let hero of heroes"  
+        (click)="onSelect(hero)" 
+        [class.selected]="hero === selectedHero">
         <span class="badge">{{hero.id}}</span> {{hero.name}}
     </li>
 </ul>
+
+<!-- Mostramos del detalles del hero seleccionado si existe-->
+<div *ngIf="selectedHero">
+
+    <h2>{{selectedHero.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{selectedHero.id}}</div>
+    <div>
+      <label for="hero-name">Hero name: </label>
+      <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+    </div>
+  
+  </div>

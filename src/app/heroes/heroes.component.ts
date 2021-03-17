@@ -26,12 +26,17 @@ export class HeroesComponent implements OnInit {
   };
   /* Declaramos que heroes va a ser un array de objetos Hero para evitar errores*/
   heroes: Hero[] = HEROES;
+  /* Declaramos la propiedad selectedHero sin valor inicial (? indica que puede no tener valor)*/
+  selectedHero?: Hero;
 
 
   constructor() { /* Constructor del componente */}
 
   ngOnInit(): void {
     /*Código que se ejecuta al crear el componente con éxito*/
+  }
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
   }
 
 }
