@@ -1,6 +1,8 @@
 /* Importa clases y componentes que va a utilizar el componente*/
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
+import { HEROES } from '../mock-heroes';
+
 
 /* Metadatos del componente
   * string selector nombre del selector, se utilizará esta etiqueta html para llamar al componente
@@ -22,6 +24,8 @@ export class HeroesComponent implements OnInit {
     id: 1,
     name: 'Windstorm'
   };
+  /* Declaramos que heroes va a ser un array de objetos Hero para evitar errores*/
+  heroes: Hero[] = HEROES;
 
 
   constructor() { /* Constructor del componente */}
