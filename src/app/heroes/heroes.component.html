@@ -4,5 +4,13 @@
 <!-- Muestra las propiedades id y name de la propiedad hero del componente-->
 <!--El pipe | uppercase transformar el texto a mayúsculas-->
 <h3>{{hero.name | uppercase}} Details</h3>
-<div><span>id: </span>{{hero.id}}</div>
-<div><span>name: </span>{{hero.name}}</div>
+<div>
+    <span>id: </span>{{hero.id}}
+</div>
+<!--Se muestra la propiedad name de hero y se modifica a través del input
+    ngModel enlaza la entrada de input con la propiedad del objeto hero
+    y la modifica en tiempo real-->
+<div>
+    <label for="name">Hero name: </label>
+    <input id="name" [(ngModel)]="hero.name" placeholder="name">
+  </div>
