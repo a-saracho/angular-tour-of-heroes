@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Hero } from './hero';
 import { HEROES } from './mock-heroes';
 
@@ -10,7 +11,15 @@ export class HeroService {
 
   constructor() { }
 
-  getHeroes(): Hero[] {
+  /* Recibimos/enviamos los datos de forma síncrona */
+  /*getHeroes(): Hero[] {
     return HEROES;
+  }*/
+
+  /* Recibimos/enviamos los datos de forma asíncrona y usamos observable
+      ya que la petición http al servidor nos devolverá los datos como observable*/
+  getHeroes(): Observable<Hero[]> {
+    const heroes = of(HEROES);
+    return heroes;
   }
 }

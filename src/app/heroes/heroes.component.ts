@@ -46,7 +46,12 @@ export class HeroesComponent implements OnInit {
   /* Función que para importar los datos de los heroes del heroService
    a la propiedad heroes del componente */
   getHeroes(): void {
-    this.heroes = this.heroService.getHeroes();
+    /* Importamos los datos de forma síncrona */
+    /* this.heroes = this.heroService.getHeroes();*/
+    /* Importamos los datos de forma asíncrona, usamos subscribe ya que
+        no recibiremos los datos de forma inmediata, tenemos que esperar
+        a que HeroService los reciba del servidor*/
+    this.heroService.getHeroes().subscribe((heroes: Hero[]) => this.heroes = heroes);
   }
 
 }
