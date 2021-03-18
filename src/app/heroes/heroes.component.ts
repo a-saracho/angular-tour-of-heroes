@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 /*import { HEROES } from '../mock-heroes';*/
 import { HeroService } from '../hero.service';
+import { MessageService } from '../message.service';
 
 
 /* Metadatos del componente
@@ -33,7 +34,7 @@ export class HeroesComponent implements OnInit {
 
   /* Se genera la variable HeroService ya inicializada e instanciada dentro
      del componente hero, si no le indicaramos el ámbito habría que declararla en el componente */
-  constructor(private heroService: HeroService) { /* Constructor del componente */}
+  constructor(private heroService: HeroService, private messageService: MessageService) { /* Constructor del componente */}
 
   ngOnInit(): void {
     /*Código que se ejecuta al crear el componente con éxito*/
@@ -41,6 +42,7 @@ export class HeroesComponent implements OnInit {
   }
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
+    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
   }
 
   /* Función que para importar los datos de los heroes del heroService

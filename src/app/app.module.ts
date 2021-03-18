@@ -7,12 +7,14 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component'; // <-
 
 /*Para utilizar ngModule en los inputs para modificar propiedades*/
 import { FormsModule } from '@angular/forms';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
