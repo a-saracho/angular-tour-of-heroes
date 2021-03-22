@@ -1,5 +1,11 @@
 <h1>{{title}}</h1>
 <!--Añadimos el componente heroes-->
-<app-heroes></app-heroes>
+<!--<app-heroes></app-heroes>-->
+<!--Navegación utilizando las rutas del enrutador mediante routerLink-->
+<nav>
+    <a routerLink="/heroes">Heroes</a>
+</nav>
+<!--Enrutador para mostrar los componentes según la url del navegador-->
+<router-outlet></router-outlet>
 <!--Añadimos el componente messages-->
 <app-messages></app-messages>
