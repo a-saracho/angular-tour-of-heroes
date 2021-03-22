@@ -40,10 +40,11 @@ export class HeroesComponent implements OnInit {
     /*Código que se ejecuta al crear el componente con éxito*/
     this.getHeroes();
   }
-  onSelect(hero: Hero): void {
+  /* Quitamos el onselect ya que ahora se hace con rutas */
+  /*onSelect(hero: Hero): void {
     this.selectedHero = hero;
     this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
-  }
+  }*/
 
   /* Función que para importar los datos de los heroes del heroService
    a la propiedad heroes del componente */
