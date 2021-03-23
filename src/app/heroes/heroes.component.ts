@@ -57,4 +57,20 @@ export class HeroesComponent implements OnInit {
     this.heroService.getHeroes().subscribe((heroes: Hero[]) => this.heroes = heroes);
   }
 
+  /* Para añadir heroes a la aplicación, llamaremos a la función del componente hero */
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.addHero({ name } as Hero)
+      .subscribe(hero => {
+        this.heroes.push(hero);
+      });
+  }
+  /* Psra borrar heroes de la aplicación, llamaremos a la función del componente hero */
+  delete(hero: Hero): void {
+    // TODO: Mejorar el borrado visual para que sólo se haga cuando el borrado tiene éxito
+    this.heroes = this.heroes.filter(h => h !== hero);
+    this.heroService.deleteHero(hero.id).subscribe();
+  }
+
 }

@@ -25,6 +25,10 @@ export class HeroService {
       return HEROES;
     }*/
     private heroesUrl = 'api/heroes';  // URL to web api
+    /* Cabeceras de las peticiones HTTP */
+    httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
 
   /* Recibimos/enviamos los datos de forma asíncrona y usamos observable
@@ -40,13 +44,45 @@ export class HeroService {
         catchError(this.handleError<Hero[]>('getHeroes', []))
       );
   }
-  /* Función para buscar un hero por su id */
-  getHero(id: number): Observable<Hero> {
+  /* Función para buscar un hero por su id, cuando trabajamos con datos locales*/
+  /*getHero(id: number): Observable<Hero> {
     // For now, assume that a hero with the specified `id` always exists.
     // Error handling will be added in the next step of the tutorial.
     const hero = HEROES.find(h => h.id === id) as Hero;
     this.messageService.add(`HeroService: fetched hero id=${id}`);
     return of(hero);
+  }*/
+  /* GET hero by id. Will 404 if id not found
+   sustituye a la anterior getHero para realizar la petición mediante GET al servidor REST */
+  getHero(id: number): Observable<Hero> {
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get<Hero>(url).pipe(
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Hero>(`getHero id=${id}`))
+    );
+  }
+  /** POST: add a new hero to the server */
+  addHero(hero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
+      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+      catchError(this.handleError<Hero>('addHero'))
+    );
+  }
+  /** PUT: update the hero on the server */
+  updateHero(hero: Hero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
+  }
+  /** DELETE: delete the hero from the server */
+  deleteHero(id: number): Observable<Hero> {
+    const url = `${this.heroesUrl}/${id}`;
+
+    return this.http.delete<Hero>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted hero id=${id}`)),
+      catchError(this.handleError<Hero>('deleteHero'))
+    );
   }
   /* Log a HeroService message with the MessageService
      (para no llamar a message service directamente todo el rato) */

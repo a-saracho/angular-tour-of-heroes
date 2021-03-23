@@ -15,18 +15,16 @@
     <input id="name" [(ngModel)]="hero.name" placeholder="name">
 </div>-->
 
-<!--Usamos un bucle for para mostrar los heroes
+<h2>My Heroes</h2>
+<ul class="heroes">
+<!--Sustituimos el onSelect por rutas-->
+    <!--Usamos un bucle for para mostrar los heroes
     la variable hero del bucle for sólo tiene como ambito
     el de la etiqueta en la que se declara el bucle
     una vez acaba el bucle no afecta variables anteriores con ese nombre
     si no hay elementos en el bucle no se crea la etiqueta que lo contiene-->
-
-<!--Añadimos un evento onclick al elemento de lsita generado por el bucle-->
-
-<!--Añadimos la clase selected al elemento si se corrresponde con selectedHero-->
-<h2>My Heroes</h2>
-<ul class="heroes">
-    <!--Sustituimos el onSelect por rutas-->
+    <!--Añadimos un evento onclick al elemento de lsita generado por el bucle-->
+    <!--Añadimos la clase selected al elemento si se corrresponde con selectedHero-->
     <!--<li *ngFor="let hero of heroes"  
         (click)="onSelect(hero)" 
         [class.selected]="hero === selectedHero">
@@ -36,8 +34,19 @@
         <a routerLink="/detail/{{hero.id}}">
             <span class="badge">{{hero.id}}</span> {{hero.name}}
         </a>
+        <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
     </li>
 </ul>
+
+<!--Formulario para crear nuevos heroes-->
+<div>
+    <label id="new-hero">Hero name: </label>
+    <input for="new-hero" #heroName />  
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button class="add-button" (click)="add(heroName.value); heroName.value=''">
+      Add hero
+    </button>
+</div>
 
 <!-- Utilizamos el componente hero-detail, al cual le pasamos selectedHero como hero-->
 <!--<app-hero-detail [hero]="selectedHero"></app-hero-detail>-->

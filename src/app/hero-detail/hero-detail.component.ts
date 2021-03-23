@@ -32,6 +32,11 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.getHero(id)
       .subscribe(hero => this.hero = hero); /* Buscamos el hero mediante su id para tomarlo */
   }
+  /* Guardar datos de Hero */
+  save(): void {
+    this.heroService.updateHero(this.hero)
+      .subscribe(() => this.goBack());
+  }
   /* Función para volver atrás */
   goBack(): void {
     this.location.back();
