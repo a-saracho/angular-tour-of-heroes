@@ -54,7 +54,8 @@ export class HeroService {
   }*/
   /* GET hero by id. Will 404 if id not found
    sustituye a la anterior getHero para realizar la petición mediante GET al servidor REST */
-  getHero(id: number): Observable<Hero> {
+  getHero(hero: number | Hero): Observable<Hero> {
+    const id = typeof hero === 'number' ? hero : hero.id;
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
@@ -76,7 +77,8 @@ export class HeroService {
     );
   }
   /** DELETE: delete the hero from the server */
-  deleteHero(id: number): Observable<Hero> {
+  deleteHero(hero: number | Hero): Observable<Hero> {
+    const id = typeof hero === 'number' ? hero : hero.id;
     const url = `${this.heroesUrl}/${id}`;
 
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
